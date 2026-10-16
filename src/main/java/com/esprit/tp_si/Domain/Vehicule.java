@@ -3,6 +3,8 @@ package com.esprit.tp_si.Domain;
 import jakarta.persistence.*;
 import lombok.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -35,9 +37,6 @@ public class Vehicule {
     @JoinColumn(name = "id_agence")
     private Agence agence;
 
-    @OneToMany(mappedBy = "vehicule")
-    @ToString.Exclude
-    private List<Maintenance> maintenances;
 
     @OneToMany(mappedBy = "vehicule")
     @ToString.Exclude
@@ -50,5 +49,12 @@ public class Vehicule {
         inverseJoinColumns = @JoinColumn(name = "id_equipement")
     )
     @ToString.Exclude
-    private Set<Equipement> equipements;
+    private Set<Equipement> equipements = new HashSet<>();
+    @OneToMany(
+            mappedBy = "vehicule",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.PERSIST
+    )
+    @ToString.Exclude
+    private List<Maintenance> maintenances = new ArrayList<>();
 }

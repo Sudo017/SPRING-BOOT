@@ -2,6 +2,8 @@ package com.esprit.tp_si.Domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,4 +24,5 @@ public class Equipement {
 
     @ManyToMany(mappedBy = "equipements")
     @ToString.Exclude
-    private Set<Vehicule> vehicules;}
+    private Set<Vehicule> vehicules = new HashSet<>();
+}

@@ -31,6 +31,11 @@ public class Reservation {
     @JoinColumn(name = "id_client")
     private Client client;
 
-    @OneToOne(mappedBy = "reservation")
+    @OneToOne(
+            mappedBy = "reservation",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL
+    )
+    @ToString.Exclude
     private Contrat contrat;
 }
